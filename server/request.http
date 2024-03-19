@@ -1,0 +1,8 @@
+GET http://localhost:5000
+
+
+### 
+GET http://localhost:5000/api/sensor
+
+### 
+POST http://localhost:5000/api/sensor
