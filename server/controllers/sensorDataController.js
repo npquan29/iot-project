@@ -52,7 +52,5 @@ client.on('message', async (topic, payload) => {
     if(topic === topicSensor) {
         const data = JSON.parse(payload.toString());
         await insertSensorData(data);
-
-        console.log("OKE COMMIT");
     }
 })
