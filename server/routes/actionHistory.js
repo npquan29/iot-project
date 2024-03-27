@@ -1,8 +1,8 @@
 import express from 'express';
-import { filterAction, getActions, postAction } from '../controllers/actionController.js';
+import { filterAction, getActionHistory, postAction } from '../controllers/actionController.js';
 const router = express.Router();
 
-router.get('/', getActions);
+router.get('/', getActionHistory);
 router.post('/', postAction);
 router.post('/history', filterAction);
 

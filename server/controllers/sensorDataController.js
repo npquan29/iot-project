@@ -2,9 +2,7 @@ import { db } from "../db.js";
 
 import { client } from './mqttController.js';
 
-const limit = 10;
-
-export const getAllSensorDatas = async (req, res) => {
+export const getLatestSensorData = async (req, res) => {
     try {
         const sql = 'SELECT * FROM `sensor` ORDER BY time DESC LIMIT 1;';
         const [results] = await db.execute(sql);
@@ -21,9 +19,16 @@ export const insertSensorData = async ({ temperature, humidity, bright }) => {
     console.log('INSERT SENSOR DATA SUCCESS');
 }
 
-export const filterSensorDatas = async (req, res) => {
+export const getHistorySensorDatas = async (req, res) => {
     try {
-        const { type, search, column, order, page } = req.body;
+        // const { type, search, column, order, page } = req.body;
+        const type = req.query.type;
+        const column = req.query.column;
+        const order = req.query.order === 'true' ? 'ASC' : 'DESC';
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.pageSize);
+        const search = req.query.search || '';
+
         let sql = '';
         if (type === 'all') {
             sql = 'SELECT * FROM `sensor`';
@@ -31,8 +36,15 @@ export const filterSensorDatas = async (req, res) => {
         else {
             sql = 'SELECT `id`, ' + '`' + type + '`, ' + '`time` FROM `sensor`';
         }
-        if (search) sql += ' WHERE `time` LIKE ' + "'%" + search + "%'";
-        if (column !== 'all') sql += ' ORDER BY ' + column + ` ${order ? 'ASC' : 'DESC'}`;
+        if (search){
+            if(type === 'all'){
+                sql += ' WHERE `temperature` LIKE ' + `'${search}'` + ' OR `humidity` LIKE ' + `'${search}'` + ' OR `light` LIKE ' + `'${search}'` + ' OR `time` LIKE ' + `'%${search}%'`;
+            }
+            else {
+                sql += ` WHERE ${type} LIKE ` + `'${search}'` + ' OR `time` LIKE ' + `'%${search}%'`;
+            }
+        }
+        if (column !== 'all') sql += ' ORDER BY ' + column + ` ${order}`;
         const [results, fields] = await db.execute(sql);
         const totalItems = results.length;
         let currentPage = page;

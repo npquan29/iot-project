@@ -5,7 +5,7 @@ export const db = await mysql.createConnection({
     user: 'root',
     password: 'quan2910',
     database: 'iot'
-});
+});     
 
 // export const connectDB = async () => {
 //     try {
@@ -13,5 +13,5 @@ export const db = await mysql.createConnection({
 //         console.log('Connected DB');
 //     } catch (error) {
 //         console.log(error);
-//     }
-// }
+//     }        
+// }                

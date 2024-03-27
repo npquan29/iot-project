@@ -30,7 +30,8 @@ const ActionHistory = () => {
         search: '',
         column: 'all',
         order: true,
-        page: 1
+        page: 1,
+        pageSize: 10
     });
 
     const [loading, setLoading] = useState(true);
@@ -73,8 +74,9 @@ const ActionHistory = () => {
     useEffect(() => {
         const fetchData = async () => {
             // const response = await axios.post('http://localhost:5000/api/action/history', options);
-            let api = `http://localhost:5000/api/action?type=${options.type}&column=${options.column}&order=${options.order}&page=${options.page}` + `${options.search ? `&search=${options.search}` : '' }`;
+            let api = `http://localhost:5000/api/action?type=${options.type}&column=${options.column}&order=${options.order}&page=${options.page}&pageSize=${options.pageSize}` + `${options.search ? `&search=${options.search}` : '' }`;
             const response = await axios.get(api);
+
             setTotalItems(response.data.data.totalItems);
             setDataRender(response.data.data.dataRender);
             setLoading(false);
@@ -102,7 +104,7 @@ const ActionHistory = () => {
                                     <Input onPressEnter={handleEnterInput}
                                         value={inputValue}
                                         onChange={(e) => setInputValue(e.target.value)}
-                                        className="font-poppin" size="large" placeholder="Search by time..." />
+                                        className="font-poppin" size="large" placeholder={`${options.type === 'all' ? 'Search all.' : `Search by status or time` }`} />
                                 </div>
 
                                 <div className="w-[15%]">

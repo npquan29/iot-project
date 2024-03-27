@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
 
-import { filterSensorDatas, getAllSensorDatas } from '../controllers/sensorDataController.js';
+import { getHistorySensorDatas, getLatestSensorData } from '../controllers/sensorDataController.js';
 
-router.get('/', getAllSensorDatas);
-router.post('/', filterSensorDatas);
+router.get('/', getLatestSensorData);
+router.get('/history', getHistorySensorDatas);
 
 export default router;

@@ -1,20 +1,28 @@
 import { db } from "../db.js";
 import { client } from "../controllers/mqttController.js";
 
-const limit = 10;
-
-export const getActions = async (req, res) => {
+export const getActionHistory = async (req, res) => {
     try {
         const type = req.query.type;
         const column = req.query.column;
         const order = req.query.order === 'true' ? 'ASC' : 'DESC';
         const page = parseInt(req.query.page);
-        const search = req.query.search || '';
+        const limit = parseInt(req.query.pageSize);
+        let search = req.query.search || '';
 
         let sql = 'SELECT * FROM `action` WHERE 1 = 1 ';
         if (type !== 'all') sql += 'AND `device` = ' + `'` + type + `'`;
-        if (search) sql += ' AND `time` LIKE ' + "'%" + search + "%'";
+        if (search) {
+            if(type === 'all') {
+                sql += ' AND (`device` LIKE ' + `'${search}'` + `${(search === 'on' || search === 'off') ? ' OR `status` LIKE ' + `${search === 'on' ? '1' : '0' }` : ''}` + ' OR `time` LIKE ' + `'%${search}%')`; 
+            }
+            else {
+                sql += ' AND (' + `${(search === 'on' || search === 'off') ? ' `status` LIKE ' + `${search === 'on' ? '1 OR ' : '0 OR ' }` : ''}` + '`time` LIKE ' + `'%${search}%')`; 
+            }
+        }
         if (column !== 'all') sql += ' ORDER BY ' + column + ` ${order}`;
+
+        // console.log(sql);
 
         const [results, fields] = await db.execute(sql);
         const totalItems = results.length;
