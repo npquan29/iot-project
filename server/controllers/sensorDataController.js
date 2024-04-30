@@ -24,7 +24,7 @@ export const getHistorySensorDatas = async (req, res) => {
         // const { type, search, column, order, page } = req.body;
         const type = req.query.type;
         const column = req.query.column;
-        const order = req.query.order === 'true' ? 'ASC' : 'DESC';
+        const order = req.query.order;
         const page = parseInt(req.query.page);
         const limit = parseInt(req.query.pageSize);
         const search = req.query.search || '';

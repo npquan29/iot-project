@@ -5,7 +5,7 @@ export const getActionHistory = async (req, res) => {
     try {
         const type = req.query.type;
         const column = req.query.column;
-        const order = req.query.order === 'true' ? 'ASC' : 'DESC';
+        const order = req.query.order;
         const page = parseInt(req.query.page);
         const limit = parseInt(req.query.pageSize);
         let search = req.query.search || '';
