@@ -125,3 +125,44 @@ export const filterAction = async (req, res) => {
         res.status(404).send({ message: error.message });
     }
 }
+
+export const getActionData = async (req, res) => {
+    try {
+        const searchType = req.query.searchType;
+        const column = req.query.column;
+        const order = req.query.order;
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.pageSize);
+        let search = req.query.search || '';
+
+        let sql = 'SELECT * FROM `action` WHERE 1 = 1';
+        if(search) {
+            if(searchType === 'all') {
+                sql += ' AND (`device` LIKE ' + `'%${search}%'` + `${(search === 'on' || search === 'off') ? ' OR `status` LIKE ' + `${search === 'on' ? '1' : '0' }` : ''}` + ' OR `time` LIKE ' + `'%${search}%')`;
+            }
+            else if(searchType === 'status') {
+                sql += `${(search === 'on' || search === 'off') ? ' AND `status` LIKE ' + `${search === 'on' ? '1' : '0' }` : ''}`;
+            }
+            else {
+                sql += ` AND ${searchType} LIKE ` + `'%${search}%'`;
+            }
+        }
+        if (column === 'all') {
+            sql += ' ORDER BY id DESC'; 
+        }
+        else {
+            sql += ' ORDER BY ' + column + ` ${order}`;
+        };
+        const [results, fields] = await db.execute(sql);
+        const totalItems = results.length;
+        let currentPage = page;
+        const totalPages = (totalItems % limit == 0 ? totalItems / limit : (Math.floor(totalItems / limit) + 1));
+        if (page > totalPages) currentPage = 1;
+        const index = (currentPage - 1) * limit;
+        const dataRender = results.slice(index, Math.min(index + limit, results.length));
+        res.status(200).send({ message: 'success', data: { dataRender, totalItems } });
+        // res.status(200).send("OKE");
+    } catch (error) {
+        res.status(404).send({ message: error.message });
+    }
+}

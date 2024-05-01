@@ -31,7 +31,21 @@ body {
   background-color: #E0F4FF;
 }
 
+@layer utilities {
+  .scrollbar-hidden::-webkit-scrollbar {
+        display: none;
+  }
+}
+
 @layer components {
+  .nav-link {
+    @apply w-full leading-[1.15] py-[15px] uppercase inline-block border border-main rounded-lg text-main bg-second tracking-[0.25px] transition-all text-center hover:text-second hover:bg-main;
+  }
+
+  .nav-link.active {
+    @apply text-second bg-main;
+  }
+
   .bg-temp {
     background-image: linear-gradient(45deg, #ffa500, #ff0000);
   }
