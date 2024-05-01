@@ -243,8 +243,6 @@ const ActionHistory = () => {
         getData();
     }, [options]);
 
-    // console.log(options);
-
     return (
         <>
             <NavBar />
