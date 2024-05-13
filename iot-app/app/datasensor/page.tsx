@@ -13,6 +13,7 @@ interface DataArray {
   temperature?: number;
   humidity?: number;
   light?: number;
+  randomSensor?: number;
   time: string;
 }
 
@@ -214,6 +215,7 @@ interface DataArray {
 //   )
 // }
 
+/* Show Case 1 */
 const DataSensor = () => {
 
   const [totalItems, setTotalItems] = useState(0);
@@ -423,5 +425,226 @@ const DataSensor = () => {
     </>
   )
 }
+/* End Show Case 1 */
+
+// Addition Sensor
+// const DataSensor = () => {
+
+//   const [totalItems, setTotalItems] = useState(0);
+//   const [dataRender, setDataRender] = useState<DataArray[]>([]);
+//   const [searchValue, setSearchValue] = useState("");
+//   const [searchType, setSearchType] = useState("all");
+//   const [columns, setColumns] = useState([
+//     { label: 'id', value: 'id', view: true },
+//     { label: 'temperature', value: 'temperature', view: true },
+//     { label: 'humidity', value: 'humidity', view: true },
+//     { label: 'light', value: 'light', view: true },
+//     { label: 'new sensor', value: 'randomSensor', view: true },
+//     { label: 'time', value: 'time', view: true }
+//   ]);
+
+//   const [options, setOptions] = useState({
+//     column: 'all',
+//     order: true,
+//     page: 1,
+//     pageSize: 10
+//   });
+
+//   const [loading, setLoading] = useState(true);
+
+//   const handlePageChange = (newPage: number) => {
+//     setOptions(prev => ({
+//       ...prev,
+//       page: newPage
+//     }));
+//   };
+
+//   const handleChangeSearchType = (value: string) => {
+//     setSearchType(value);
+//   };
+
+//   const handleChangeLimit = (value: number) => {
+//     setOptions(prev => ({
+//       ...prev,
+//       pageSize: value,
+//       page: 1
+//     }));
+//   }
+  
+//   const handleSort = (value: string) => {
+//     setOptions(prev => ({
+//       ...prev,
+//       column: value,
+//       order: prev.column === value ? !prev.order : true,
+//     }));
+//   };
+
+//   const getData = async () => {
+//     let api = `http://localhost:5000/api/sensor/history-v1?searchType=${searchType}&column=${options.column}&order=${options.order ? 'ASC' : 'DESC'}&page=${options.page}&pageSize=${options.pageSize}` + `${searchValue ? `&search=${searchValue}` : ''}`;
+//     const response = await axios.get(api);
+//     setTotalItems(response.data.data.totalItems);
+//     setDataRender(response.data.data.dataRender);
+//     setLoading(false);
+//   }
+
+//   const handleEnterInput = () => {
+//     setOptions(prev => ({
+//       ...prev,
+//       column: 'all',
+//       page: 1
+//     }));
+//   }
+
+//   const handleClickSearch = () => {
+//     setOptions(prev => ({
+//       ...prev,
+//       column: 'all',
+//       page: 1
+//     }));
+//   }
+
+//   useEffect(() => {
+//     getData();
+//   }, [options])
+
+//   return (
+//     <>
+//       <NavBar />
+//       <div className="py-[30px] px-[60px]">
+//         {loading ? (
+//           <>
+//             <h1 className="p-4 text-3xl text-black font-poppin font-[500] block text-center">Loading data...</h1>
+//           </>
+//         ) : (
+//           <>
+//             <div className="w-[80%] mx-auto">
+//               {/* Search and Select */}
+//               <div className="flex justify-between space-x-[40px]">
+//                 <div className="flex flex-1">
+//                   <Input 
+//                     onPressEnter={handleEnterInput}
+//                     value={searchValue}
+//                     onChange={(e) => setSearchValue(e.target.value)}
+//                     className="font-poppin rounded-r-none" 
+//                     size="large" 
+//                     placeholder={`${searchType === 'all' ? 'Search all' : `Search by ${searchType}`}`}
+//                   />
+//                   <button 
+//                     className="border-[1px] border-main bg-main hover:bg-third hover:border-third rounded-[8px] rounded-s-none px-3 text-second ms-[-1px]"
+//                     onClick={handleClickSearch}
+//                   >
+//                     Search
+//                   </button>
+//                 </div>
+
+//                 <div className="w-[25%] font-poppin flex items-center">
+//                   <span className="text-[16px]">Search by</span>
+//                   <Select
+//                     className="flex-1 h-full ml-[15px]"
+//                     defaultValue="All"
+//                     onChange={handleChangeSearchType}
+//                     options={[
+//                       { value: 'all', label: 'All' },
+//                       { value: 'temperature', label: 'Temperature' },
+//                       { value: 'humidity', label: 'Humidity' },
+//                       { value: 'light', label: 'Light' },
+//                       { value: 'randomSensor', label: 'New Sensor' },
+//                       { value: 'time', label: 'Time' }
+//                     ]}
+//                   />
+//                 </div>
+//                 <div className="w-[12%] flex items-center">
+//                   <span className="font-poppin text-[16px]">Limit</span>
+//                   <Select
+//                     className="h-full w-full font-poppin ml-[15px]"
+//                     defaultValue={10}
+//                     onChange={handleChangeLimit}
+//                     options={[
+//                       { value: 10, label: 10 },
+//                       { value: 20, label: 20 },
+//                       { value: 50, label: 50 },
+//                       { value: 100, label: 100 }
+//                     ]}
+//                   />
+//                 </div>
+//               </div>
+//               {/* End Search and Select */}
+
+//               {/* Data Table */}
+//               {dataRender.length > 0 ? (
+//                 // Scroll
+//                 // <div className="mt-[30px] max-h-[405.6px] overflow-y-scroll scrollbar-hidden">
+//                 //   <table className="bg-white border-collapse w-full sensor-table">
+//                 //     <thead className="sticky top-0">
+//                 //       <tr>
+//                 //         {columns.map((it, idx) => (
+//                 //           it.view && (
+//                 //             <th onClick={() => handleSort(it.label)} key={idx} className={`${options.column === it.label ? `bg-second text-main` : `bg-white`} uppercase cursor-pointer hover:bg-main hover:text-second transition-all`}>{it.label}</th>
+//                 //           )
+//                 //         ))}
+//                 //       </tr>
+//                 //     </thead>
+//                 //     <tbody>
+//                 //       {dataRender.map(it => (
+//                 //         <tr key={it.id}>
+//                 //           <td>{it.id}</td>
+//                 //           <td>{it.temperature}</td>
+//                 //           <td>{it.humidity}</td>
+//                 //           <td>{it.light}</td>
+//                 //           <td>{formatISODate(it.time)}</td>
+//                 //         </tr>
+//                 //       ))}
+//                 //     </tbody>
+//                 //   </table>
+//                 // </div>
+//                 // End Scroll
+
+//                 // No Scroll
+//                 <div className="mt-[30px]">
+//                   <table className="bg-white border-collapse w-full sensor-table-v1">
+//                     <thead>
+//                       <tr>
+//                         {columns.map((it, idx) => (
+//                           it.view && (
+//                             <th onClick={() => handleSort(it.value)} key={idx} className={`${options.column === it.value ? `bg-second text-main` : `bg-white`}  uppercase cursor-pointer hover:bg-main hover:text-second transition-all`}>{it.label}</th>
+//                           )
+//                         ))}
+//                       </tr>
+//                     </thead>
+//                     <tbody>
+//                       {dataRender.map(it => (
+//                         <tr key={it.id}>
+//                           <td className="w-[10%]">{it.id}</td>
+//                           <td className="w-[17%]">{it.temperature}</td>
+//                           <td className="w-[17%]">{it.humidity}</td>
+//                           <td className="w-[17%]">{it.light}</td>
+//                           <td className="w-[17%]">{it.randomSensor}</td>
+//                           <td className="w-[22%]">{formatISODate(it.time)}</td>
+//                         </tr>
+//                       ))}
+//                     </tbody>
+//                   </table>
+//                 </div>
+//                 // End No Scroll
+//               ) : (
+//                 <h1 className="p-4 text-3xl text-black font-poppin font-[500] block text-center uppercase">No data</h1>
+//               )}
+//               {/* End Data Table */}
+//             </div>
+
+//             {/* Pagination */}
+//             {totalItems > 0 && (
+//               <div className="flex justify-center mt-[30px] pagination-table">
+//                 <Pagination current={options.page} onChange={handlePageChange} pageSize={options.pageSize} total={totalItems} showSizeChanger={false} />
+//               </div>
+//             )}
+//             {/* End Pagination */}
+//           </>
+//         )}
+//       </div>
+//     </>
+//   )
+// }
+// Addition Sensor
 
 export default DataSensor;

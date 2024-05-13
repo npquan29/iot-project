@@ -17,8 +17,8 @@ const NavBar = () => {
         <>
             <div className="p-5 bg-white shadow-one">
                 <div className="flex justify-evenly font-poppin">
-                    {listLink.map(item => (
-                        <div className="w-56">
+                    {listLink.map((item, index) => (
+                        <div key={index} className="w-56">
                             <Link href={item.href} className={`nav-link ${pathname === item.href ? 'active' : ''}`}>{item.title}</Link>
                         </div>
                     ))}

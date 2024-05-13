@@ -31,6 +31,23 @@ body {
   background-color: #E0F4FF;
 }
 
+.alertSensor {
+  background-color: white;
+  animation: colorChange 1s infinite alternate;
+}
+
+@keyframes colorChange {
+  0% {
+      background-color: white;
+  }
+  50% {
+      background-color: red;
+  }
+  100% {
+      background-color: white; 
+  }
+}
+
 @layer utilities {
   .scrollbar-hidden::-webkit-scrollbar {
         display: none;
@@ -46,6 +63,54 @@ body {
     @apply text-second bg-main;
   }
 
+  .temp-1 {
+    background-image: linear-gradient(45deg, #Fff1da, #Fdbc4f);
+  }
+  
+  .temp-2 {
+    background-image: linear-gradient(45deg, #Fdbc4f, #Ff7d00);
+  }
+  
+  .temp-3 {
+    background-image: linear-gradient(45deg, #Ff7d00, #ff0000);
+  }
+
+  .humi-1 {
+    background-image: linear-gradient(45deg, #e0e0f7, #8c9eff);
+  }
+  
+  .humi-2 {
+    background-image: linear-gradient(45deg, #8c9eff, #87c4ff);
+  }
+  
+  .humi-3 {
+    background-image: linear-gradient(45deg, #87c4ff, #39a7ff);
+  }
+
+  .light-1 {
+    background-image: linear-gradient(45deg, #f0f0f0, #ffd54f);
+  }
+  
+  .light-2 {
+    background-image: linear-gradient(45deg, #ffd54f, #ffb300);
+  }
+  
+  .light-3 {
+    background-image: linear-gradient(45deg, #ffb300, #ffff00);
+  }
+  
+  .sensor-1 {
+    background-image: linear-gradient(45deg, #f0f0f0, #98b2bb);
+  }
+  
+  .sensor-2 {
+    background-image: linear-gradient(45deg, #98b2bb, #039316);
+  }
+  
+  .sensor-3 {
+    background-image: linear-gradient(45deg, #039316, #08e226);
+  }
+
   .bg-temp {
     background-image: linear-gradient(45deg, #ffa500, #ff0000);
   }
@@ -58,8 +123,16 @@ body {
     background-image: linear-gradient(45deg, #ffca03, #ffff00);
   }
 
+  .bg-sensor {
+    background-image: linear-gradient(45deg, #039316, #08e226);
+  }
+
   .card {
     @apply flex items-center bg-white rounded-lg overflow-hidden shadow-two w-[28%];
+  }
+
+  .card-v1 {
+    @apply flex items-center bg-white rounded-lg overflow-hidden shadow-two w-[20%];
   }
 
   .card-icon {
@@ -76,6 +149,10 @@ body {
 
   .sensor-table th, .sensor-table td {
     @apply w-[20%] border border-third p-[10px] text-center font-poppin leading-[1]
+  }
+
+  .sensor-table-v1 th, .sensor-table-v1 td {
+    @apply border border-third p-[10px] text-center font-poppin leading-[1]
   }
 
   .pagination-table ul.ant-pagination {
