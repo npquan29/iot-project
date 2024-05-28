@@ -10,6 +10,7 @@ const connectUrl = `mqtt://${host}:${port}`;
 const topicSensor = 'sensor';
 const topicConfirmLed = 'confirm/led';
 const topicConfirmFan = 'confirm/fan';
+const topicConfirmDoor = 'confirm/door';
 
 export const client = mqtt.connect(connectUrl, {
     clientId,
@@ -23,7 +24,8 @@ export const client = mqtt.connect(connectUrl, {
 export const connectMQTT = () => {
     client.on('connect', () => {
         console.log('MQTT connected');
-        client.subscribe([topicConfirmLed, topicConfirmFan, topicSensor]);
+        client.subscribe([topicConfirmLed, topicConfirmFan, topicSensor, topicConfirmDoor]); // Add Device
+        // client.subscribe([topicConfirmLed, topicConfirmFan, topicSensor]); // Show Case 1
         console.log("SUB OK");
     });
 
