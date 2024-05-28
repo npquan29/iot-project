@@ -169,7 +169,7 @@ client.on('message', async (topic, payload) => {
     if(topic === topicSensor) {
         const data = JSON.parse(payload.toString());
         console.log(data);
-        await insertSensorData(data);
-        // await insertV1(data);
+        // await insertSensorData(data);
+        await insertV1(data);
     }
 })
