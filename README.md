@@ -68,11 +68,12 @@ export const client = mqtt.connect(connectUrl, {
 npm run dev
 ```
 - Giao diện Dashboard:
-![Dashboard](https://scontent.fhan5-9.fna.fbcdn.net/v/t1.15752-9/433589022_2375425969308550_7543537801723997195_n.png?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Z2rYHTLfXpYAX91CeWf&_nc_ht=scontent.fhan5-9.fna&oh=03_AdQSdsgK0hFui3UMGSqefEHTvOKEdRTiAjxYvrLiIHOkXg&oe=662C66D5)
+![Dashboard](https://scontent.fhan14-3.fna.fbcdn.net/v/t1.15752-9/433589022_2375425969308550_7543537801723997195_n.png?_nc_cat=110&ccb=1-7&_nc_sid=9f807c&_nc_ohc=9Lg0f-bX5vAQ7kNvgEGB1jk&_nc_oc=Adh-CfDM81KqUFjoWM4LYugr-ouBar27Tx-Se8IGxO5YvOuCK5ZY2-kiQZ_Z9hWfpUE&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&oh=03_Q7cD1gFBIJwwzKzkQxPydnOBYIU88wp_Ls9z7XCxwXYQBZtJBw&oe=67D52215)
 - Giao diện Data Sensor:
-![Data Sensor](https://scontent.fhan5-6.fna.fbcdn.net/v/t1.15752-9/433454559_392692973623672_6980974951250184786_n.png?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6WzAOgu5wiUAX-up7X1&_nc_ht=scontent.fhan5-6.fna&oh=03_AdSaWauNhHOLF5AwGGt9SV7ApJhlfoOffmwzx9KM3lnK3Q&oe=662C4684)
+![Data Sensor](https://scontent.fhan14-4.fna.fbcdn.net/v/t1.15752-9/433454559_392692973623672_6980974951250184786_n.png?_nc_cat=107&ccb=1-7&_nc_sid=9f807c&_nc_ohc=ydiir8l-sxYQ7kNvgHLGGtT&_nc_oc=AdjAV0T4_9c06PJQK4djUj8V4xnXstNDwOnT7pmM0qTgHW79HOWQIxl0S7q_3AMvaVM&_nc_zt=23&_nc_ht=scontent.fhan14-4.fna&oh=03_Q7cD1gEda6vkEw5p7kTohvw7t8gNGbqID-AM49UslCx1rscWEA&oe=67D501C4)
+)
 - Giao diện Action History:
-![Action History](https://scontent.fhan5-2.fna.fbcdn.net/v/t1.15752-9/433622561_1143770213299948_8275038978554833592_n.png?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=XTZXrRrv6jEAX8a9lmJ&_nc_ht=scontent.fhan5-2.fna&oh=03_AdSPbscKYsRWr9IhEXgbIiMy9oBkTvIXfLLoz9-gPyo7sQ&oe=662C6F14)
+![Action History](https://scontent.fhan14-4.fna.fbcdn.net/v/t1.15752-9/433622561_1143770213299948_8275038978554833592_n.png?_nc_cat=102&ccb=1-7&_nc_sid=9f807c&_nc_ohc=trxeBiScQtQQ7kNvgHalhXq&_nc_oc=AdizDz0r8vggKJNlcQf0CGi8tguHNCsHvQI-NlTJ2utLTzahFjA5IyRl5tLOOYgf5RU&_nc_zt=23&_nc_ht=scontent.fhan14-4.fna&oh=03_Q7cD1gENwg5L0IP2oZVkbX1vaHIyZHaV5xQEeC9DZRfAcJFqbA&oe=67D52A54)
 
 ## Khởi chạy Back-end
 - Mở folder server trong terminal và chạy câu lệnh:
